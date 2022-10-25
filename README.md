@@ -8,3 +8,6 @@ Start doing the frontend part and figure out what should be helpfull for the bac
 Do a database
 -Write the form of the entities
 Test the App
+
+
+Tests

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Image, Button, Text } from "react-native";
+import { View, StyleSheet, Image, Button, Text, ProgressViewIOSComponent } from "react-native";
 import ChooseOption from '../../components/ChooseOption';
 import logoImage from '../../../assets/images/logoCloudLove.png';
 import loginImage from '../../../assets/images/startUpPage.png';
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
 
 const Home = () => {
   return (
+
     <View style={styles.container_buttons}>
       <Image
         source={{

@@ -1,6 +1,10 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Button} from 'react-native';
+import LogInPage from '../../screens/LogInPage/LogInPage';
+import { useNavigation } from '@react-navigation/native';
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -16,9 +20,18 @@ const styles = StyleSheet.create({
 });
 
 const LogInButton = () => {
+  const navigation=useNavigation();
   return (
     <View style={styles.container}>
-      <Button title="Log In" color="white" style={styles.button} />
+      <Button 
+        onPress = {() =>
+          {navigation.navigate('Home')}
+        }
+  
+        title="Log In" 
+        color="white" 
+        style={styles.button} >
+        </Button>
     </View>
   );
 };

@@ -6,21 +6,10 @@ import { useNavigation } from '@react-navigation/native';
 
 
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#A681F3',
-    borderRadius: 10,
-    paddingTop: 3,
-    paddingBottom: 3,
-    marginBottom: 10,
-  },
-  button: {
-    textDecorationColor: 'white',
-  },
-});
+const LogInButton = (props) => {
 
-const LogInButton = () => {
-  const navigation=useNavigation();
+  const {navigation}=props;
+
   return (
     <View style={styles.container}>
       <Button 
@@ -35,5 +24,17 @@ const LogInButton = () => {
     </View>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#A681F3',
+    borderRadius: 10,
+    paddingTop: 3,
+    paddingBottom: 3,
+    marginBottom: 10,
+  },
+  button: {
+    textDecorationColor: 'white',
+  },
+});
 
 export default LogInButton;

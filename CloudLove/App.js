@@ -4,13 +4,13 @@ import LogInPage from './src/screens/LogInPage/LogInPage';
 import { View } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AppNavigator from './src/app.navigator';
+import AppNavigator from './src/navigation/app.navigator';
 
 const App = () => {
   return (
     <NavigationContainer>
       <View>
-        <Home/>
+        <LogInPage/>
       </View>
     </NavigationContainer>
   );

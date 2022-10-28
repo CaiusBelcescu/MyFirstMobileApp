@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, StyleSheet, Image, Button, Text, ProgressViewIOSComponent } from "react-native";
-import ChooseOption from '../../components/ChooseOption';
 import logoImage from '../../../assets/images/logoCloudLove.png';
 import loginImage from '../../../assets/images/startUpPage.png';
 import { NavigationActions as navigation } from "react-navigation";
+import LogInButton from '../../components/LogInButton';
+import SignUpButton from '../../components/SignUpButton';
+
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
 const loginImageUri = Image.resolveAssetSource(loginImage).uri;
 
@@ -47,10 +49,20 @@ const Home = () => {
         style={styles.logo}
       />
       <View style={styles.container}>
-        <ChooseOption />
+        <View style={styles2.container}>
+          <LogInButton />
+          <SignUpButton />
+        </View>
       </View>
     </View>
   );
 };
+
+const styles2 = StyleSheet.create({
+  container: {
+    backgroundColor: '#E799B6',
+    width: '80%',
+  },
+});
 
 export default Home;

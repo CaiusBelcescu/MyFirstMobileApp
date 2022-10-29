@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Home from './src/screens/Home';
+import Home from './src/screens/Home/Home';
 import LogInPage from './src/screens/LogInPage/LogInPage';
 import { View } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,7 +10,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <View>
-        <LogInPage/>
+        <Home/>
       </View>
     </NavigationContainer>
   );

@@ -3,8 +3,9 @@ import { View, StyleSheet, Image, Button, Text, ProgressViewIOSComponent } from 
 import logoImage from '../../../assets/images/logoCloudLove.png';
 import loginImage from '../../../assets/images/startUpPage.png';
 import { NavigationActions as navigation } from "react-navigation";
-import LogInButton from '../../components/LogInButton';
-import SignUpButton from '../../components/SignUpButton';
+import LogInButton from '../../components/LogInButton/LogInButton';
+import SignUpButton from '../../components/SignUpButton/SignUpButton';
+import { withNavigation } from "react-navigation"; 
 
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
 const loginImageUri = Image.resolveAssetSource(loginImage).uri;

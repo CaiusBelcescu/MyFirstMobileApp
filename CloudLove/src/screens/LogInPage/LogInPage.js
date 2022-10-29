@@ -2,8 +2,8 @@ import React from 'react';
 import {View, Text, StyleSheet, Image,TextInput} from 'react-native';
 import logoImage from '../../../assets/images/logoCloudLove.png';
 import loginImage from '../../../assets/images/startUpPage.png';
-import LogInButton from '../../components/LogInButton';
-
+import LogInButton from '../../components/LogInButton/LogInButton';
+import { withNavigation } from "react-navigation"; 
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
 const loginImageUri = Image.resolveAssetSource(loginImage).uri;
 
@@ -77,5 +77,5 @@ const styles2 = StyleSheet.create({
     width: '80%',
   },
 });
+export default withNavigation(LogInPage);
 
-export default LogInPage;

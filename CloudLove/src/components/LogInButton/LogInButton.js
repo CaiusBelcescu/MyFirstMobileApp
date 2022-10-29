@@ -14,7 +14,7 @@ const LogInButton = (props) => {
     <View style={styles.container}>
       <Button 
         onPress = {() =>
-          {navigation.navigate('Home')}
+          navigation.navigate('Login')
         }
   
         title="Log In" 

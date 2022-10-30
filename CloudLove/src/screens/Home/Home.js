@@ -1,11 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, Image, Button, Text, ProgressViewIOSComponent } from "react-native";
+import {View, StyleSheet, Image, SafeAreaView} from 'react-native';
 import logoImage from '../../../assets/images/logoCloudLove.png';
 import loginImage from '../../../assets/images/startUpPage.png';
-import { NavigationActions as navigation } from "react-navigation";
 import LogInButton from '../../components/LogInButton/LogInButton';
 import SignUpButton from '../../components/SignUpButton/SignUpButton';
-import { withNavigation } from "react-navigation"; 
 
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
 const loginImageUri = Image.resolveAssetSource(loginImage).uri;
@@ -22,7 +20,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 50,
   },
-  login: {
+  login_image: {
     width: '100%',
     height: '70%',
   },
@@ -35,13 +33,13 @@ const styles = StyleSheet.create({
 
 const Home = () => {
   return (
-
+    // <SafeAreaView>
     <View style={styles.container_buttons}>
       <Image
         source={{
           uri: loginImageUri,
         }}
-        style={styles.login}
+        style={styles.login_image}
       />
       <Image
         source={{
@@ -56,6 +54,7 @@ const Home = () => {
         </View>
       </View>
     </View>
+    // </SafeAreaView>
   );
 };
 
@@ -63,6 +62,7 @@ const styles2 = StyleSheet.create({
   container: {
     backgroundColor: '#E799B6',
     width: '80%',
+    top: 40,
   },
 });
 

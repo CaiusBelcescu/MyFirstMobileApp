@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Button} from 'react-native';
+import {NavigationActions as navigation} from 'react-navigation';
+import {useNavigation} from "@react-navigation/native";
 
 const styles = StyleSheet.create({
   container: {
@@ -16,12 +18,14 @@ const styles = StyleSheet.create({
 });
 
 const SignUpButton = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Button
         title="Sign Up"
         color="white"
         style={styles.button}
+        onPress={() => navigation.navigate('SignIn')}
       />
     </View>
   );

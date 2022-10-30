@@ -1,26 +1,19 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Alert} from 'react-native';
 import {Button} from 'react-native';
-import LogInPage from '../../screens/LogInPage/LogInPage';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
-
-
-const LogInButton = (props) => {
-
-  const {navigation}=props;
+const LogInButton = () => {
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
-      <Button 
-        onPress = {() =>
-          navigation.navigate('Login')
-        }
-  
-        title="Log In" 
-        color="white" 
-        style={styles.button} >
-        </Button>
+      <Button
+        title="Log In"
+        color="white"
+        style={styles.button}
+        onPress={() => navigation.navigate('LogIn')}
+      />
     </View>
   );
 };

@@ -4,9 +4,64 @@ import logoImage from '../../../assets/images/logoCloudLove.png';
 import loginImage from '../../../assets/images/startUpPage.png';
 import LogInButton from '../../components/LogInButton/LogInButton';
 import SignUpButton from '../../components/SignUpButton/SignUpButton';
+import CustomButton from '../../components/CustomButton/CustomButton';
 
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
 const loginImageUri = Image.resolveAssetSource(loginImage).uri;
+
+const Home = () => {
+
+  const onSignInPress = () =>{
+
+  }
+  const onLogInPress = () =>{
+    () => navigation.navigate('LogIn')
+  }
+
+  return (
+    // <SafeAreaView>
+    <View style={styles.container_buttons}>
+      <Image
+        source={{
+          uri: loginImageUri,
+        }}
+        style={styles.login_image}
+      />
+      <Image
+        source={{
+          uri: logoImageUri,
+        }}
+        style={styles.logo}
+      />
+      <View style={styles.container}>
+        <View style={styles2.container}>
+          <LogInButton />
+          <CustomButton text={'Login'} onPress={onLogInPress} type="container_Primary" />
+          <SignUpButton />
+        </View>
+      </View>
+    </View>
+    // </SafeAreaView>
+  );
+};
+
+const styles2 = StyleSheet.create({
+  container: {
+    backgroundColor: '#E799B6',
+    width: '80%',
+    top: 40,
+  },
+  containerButton: {
+    backgroundColor: '#A681F3',
+    borderRadius: 10,
+    paddingTop: 3,
+    paddingBottom: 3,
+    marginBottom: 10,
+  },
+  buttonText: {
+    textDecorationColor: 'white',
+  },
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -29,41 +84,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#E799B6',
     height: '100%',
   },
-});
-
-const Home = () => {
-  return (
-    // <SafeAreaView>
-    <View style={styles.container_buttons}>
-      <Image
-        source={{
-          uri: loginImageUri,
-        }}
-        style={styles.login_image}
-      />
-      <Image
-        source={{
-          uri: logoImageUri,
-        }}
-        style={styles.logo}
-      />
-      <View style={styles.container}>
-        <View style={styles2.container}>
-          <LogInButton />
-          <SignUpButton />
-        </View>
-      </View>
-    </View>
-    // </SafeAreaView>
-  );
-};
-
-const styles2 = StyleSheet.create({
-  container: {
-    backgroundColor: '#E799B6',
-    width: '80%',
-    top: 40,
+  containerButton: {
+    backgroundColor: '#A681F3',
+    borderRadius: 10,
+    paddingTop: 3,
+    paddingBottom: 3,
+    marginBottom: 10,
+  },
+  buttonText: {
+    textDecorationColor: 'white',
   },
 });
-
 export default Home;

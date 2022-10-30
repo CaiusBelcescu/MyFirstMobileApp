@@ -1,7 +1,13 @@
 import React from 'react';
 import {Button, Image, StyleSheet, Text, TextInput, View} from 'react-native';
+import CustomButton from '../../components/CustomButton/CustomButton';
 
 function SignInPage2() {
+
+  const onCreatePress = () =>{
+    () => navigation.navigate('LogIn')
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.general_input_container}>
@@ -38,6 +44,7 @@ function SignInPage2() {
           //onPress={() => navigation.navigate('SignIn2')}
         />
       </View>
+      <CustomButton text={'Create'} onPress={onCreatePress} type="button_container2" />
     </View>
   );
 }

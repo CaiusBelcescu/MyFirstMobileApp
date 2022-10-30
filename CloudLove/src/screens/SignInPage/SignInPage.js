@@ -1,15 +1,21 @@
 import React from 'react';
-import {Button, Image, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Button, Image, StyleSheet, Text, TextInput, View, ScrollView} from 'react-native';
 import femaleGender from '../../../assets/images/female-gender.png';
 import maleGender from '../../../assets/images/male-gender.png';
 import {NavigationActions as navigation} from "react-navigation";
 import {useNavigation} from "@react-navigation/native";
+import CustomButton from '../../components/CustomButton/CustomButton';
 
 const femaleGenderUri = Image.resolveAssetSource(femaleGender).uri;
 const maleGenderUri = Image.resolveAssetSource(maleGender).uri;
 
 function SignInPage() {
   const navigation = useNavigation();
+
+  const onNextPress = () =>{
+    () => navigation.navigate('LogIn')
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create Account</Text>
@@ -54,6 +60,7 @@ function SignInPage() {
           onPress={() => navigation.navigate('SignIn2')}
         />
       </View>
+      <CustomButton text={'Next'} onPress={onNextPress} type="button_container" />
     </View>
   );
 }

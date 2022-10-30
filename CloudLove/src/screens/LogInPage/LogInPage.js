@@ -1,13 +1,23 @@
-import React from 'react';
-import {View, Text, StyleSheet, Image, TextInput} from 'react-native';
+import React,{useState} from 'react';
+import {View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import logoImage from '../../../assets/images/logoCloudLove.png';
 import loginImage from '../../../assets/images/startUpPage.png';
 import LogInButton from '../../components/LogInButton/LogInButton';
 import {withNavigation} from 'react-navigation';
+import CustomInput from '../../components/CustomInput/CustomInput';
+import CustomButton from '../../components/CustomButton/CustomButton';
+
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
 const loginImageUri = Image.resolveAssetSource(loginImage).uri;
 
 const LogInPage = () => {
+
+  const[username,setUsername] = useState('');
+  const[password,setPassword]= useState('');
+  const onLogInPress = () =>{
+    () => navigation.navigate('LogIn')
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.container_top}>
@@ -21,15 +31,16 @@ const LogInPage = () => {
       <View>
         <View style={styles.first_input_container}>
           <Text style={styles.text}>Username:</Text>
-          <TextInput placeholder="Username..." style={styles.yourInput} />
+          <CustomInput placeholder="Username..." value={username} setValue={setUsername} secureTextEntry={false} />
         </View>
         <View style={styles.second_input_container}>
           <Text>Password:</Text>
-          <TextInput placeholder="Password..." style={styles.yourInput} />
+          <CustomInput placeholder="Password..." value={password} setValue={setPassword} secureTextEntry={true} />
         </View>
       </View>
       <View style={styles.button_container}>
         <LogInButton style={styles.button} />
+        <CustomButton text={'Login'} onPress={onLogInPress} type="container_Primary" />
       </View>
     </View>
   );

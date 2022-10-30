@@ -11,16 +11,18 @@ import { useNavigation } from '@react-navigation/native';
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
 const loginImageUri = Image.resolveAssetSource(loginImage).uri;
 
-const LogInPage = () => {
-  const navigation = useNavigation();
-  const[username,setUsername] = useState('');
-  const[password,setPassword]= useState('');
-  const onLogInPress = () =>{
-    //validate
-    navigation.navigate('SwipingScreen');
+const EmailConfirm = () => {
+
+  const navigation=useNavigation();
+  const[code,setCode] = useState('');
+  const onRegister = () =>{
+    navigation.navigate('Home');
   };
-  const onForgotPassword = () =>{
-    navigation.navigate('ForgotPassword');
+  const onResendCode= () =>{
+    //navigation.navigate('Home');
+  };
+  const onBackLogIn = () =>{
+    navigation.navigate('LogIn');
   };
 
   return (
@@ -35,17 +37,15 @@ const LogInPage = () => {
       </View>
       <View>
         <View style={styles.first_input_container}>
-          <Text style={styles.text}>Username:</Text>
-          <CustomInput placeholder="Username..." value={username} setValue={setUsername} secureTextEntry={false} />
+          <Text style={styles.text}>Email confirmation code:</Text>
+          <CustomInput placeholder="Code..." value={code} setValue={setCode} secureTextEntry={false} />
         </View>
-        <View style={styles.second_input_container}>
-          <Text>Password:</Text>
-          <CustomInput placeholder="Password..." value={password} setValue={setPassword} secureTextEntry={true} />
-        </View>
-        <CustomButton text={"Forgot password?"} onPress={onForgotPassword} type="container_forgot" />
       </View>
       <View style={styles.button_container}>
-        <CustomButton text={'Login'} onPress={onLogInPress} type="container_Primary" textColour="white"/>
+        
+        <CustomButton text={'Register'} onPress={onRegister} type="container_Primary" textColour="white"/>
+        <CustomButton text={'Resend Code'} onPress={onResendCode} type="container_forgot" textColour="gray"/>
+        <CustomButton text={'Back to Log In'} onPress={onBackLogIn} type="container_forgot" textColour="gray"/>
       </View>
     </View>
   );
@@ -101,4 +101,4 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
-export default LogInPage;
+export default EmailConfirm;

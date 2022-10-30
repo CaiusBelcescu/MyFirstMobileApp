@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text , StyleSheet, Button} from 'react-native';
 
-const CustomButton = ({onPress, text, type}) => {
+const CustomButton = ({onPress, text, type,textColour}) => {
     return (
     <View style={styles[type]}>
       <Button
         title={text}
-        color="white"
+        color={textColour}
         style={styles.button}
         onPress={onPress}
       />
@@ -22,6 +22,9 @@ const styles = StyleSheet.create({
       paddingTop: 3,
       paddingBottom: 3,
       marginBottom: 10,
+    },
+    container_forgot:{
+        
     },
     button: {
       textDecorationColor: 'white',
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
         paddingBottom: 3,
         marginBottom: 10,
         width: '50%',
-        top: 180,
+        top: 40,
       },
   });
 

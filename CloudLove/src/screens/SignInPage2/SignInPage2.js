@@ -1,12 +1,20 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {Button, Image, StyleSheet, Text, TextInput, View} from 'react-native';
 import CustomButton from '../../components/CustomButton/CustomButton';
 
 function SignInPage2() {
 
+  const navigation= useNavigation();
   const onCreatePress = () =>{
-    () => navigation.navigate('LogIn')
-  }
+    navigation.navigate('EmailConfirm');
+  };
+  const onTerms = () =>{
+    navigation.navigate('LogIn');
+  };
+  const onPrivacy = () =>{
+    navigation.navigate('LogIn');
+  };
 
   return (
     <View style={styles.container}>
@@ -36,16 +44,10 @@ function SignInPage2() {
           <TextInput placeholder="Languages..." style={styles.yourInput} />
         </View>
       </View>
-      <View style={styles.button_container}>
-        <Button
-          title="Next"
-          color="white"
-          style={styles.button}
-          //onPress={() => navigation.navigate('SignIn2')}
-        />
-      </View>
-      <CustomButton text={'Create'} onPress={onCreatePress} type="button_container2" />
-      <Text style={styles.text_bottom}>By registering, you confirm that you accept our terms of Use and Privacy Policy</Text>
+      <Text style={styles.text_bottom}>By registering, you confirm that you accept our {''}
+        <Text style={styles.link} onPress={onTerms}>Terms of Use </Text> and <Text style={styles.link} onPress={onPrivacy} >Privacy Policy</Text></Text>
+      <CustomButton text={'Create'} onPress={onCreatePress} type="button_container2" textColour="white" />
+      
     </View>
   );
 }
@@ -61,7 +63,10 @@ const styles = StyleSheet.create({
     top: 180,
   },
   text_bottom:{
-
+    marginTop: 110,
+  },
+  link:{
+    color:'#A681F9',
   },
   button: {
     textDecorationColor: 'white',

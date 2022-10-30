@@ -11,16 +11,16 @@ import { useNavigation } from '@react-navigation/native';
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
 const loginImageUri = Image.resolveAssetSource(loginImage).uri;
 
-const LogInPage = () => {
-  const navigation = useNavigation();
-  const[username,setUsername] = useState('');
-  const[password,setPassword]= useState('');
-  const onLogInPress = () =>{
-    //validate
-    navigation.navigate('SwipingScreen');
+const NewPasswordScreen = () => {
+
+  const navigation=useNavigation();
+  const[code,setCode] = useState('');
+  const[newPassword,setNewPassword]= useState('');
+  const onSubmit = () =>{
+    navigation.navigate('Home');
   };
-  const onForgotPassword = () =>{
-    navigation.navigate('ForgotPassword');
+  const onBackLogIn = () =>{
+    navigation.navigate('LogIn');
   };
 
   return (
@@ -35,17 +35,18 @@ const LogInPage = () => {
       </View>
       <View>
         <View style={styles.first_input_container}>
-          <Text style={styles.text}>Username:</Text>
-          <CustomInput placeholder="Username..." value={username} setValue={setUsername} secureTextEntry={false} />
+          <Text style={styles.text}>Email Code</Text>
+          <CustomInput placeholder="Code.." value={code} setValue={setCode} secureTextEntry={false} />
         </View>
         <View style={styles.second_input_container}>
-          <Text>Password:</Text>
-          <CustomInput placeholder="Password..." value={password} setValue={setPassword} secureTextEntry={true} />
+          <Text style={styles.text}>New Password</Text>
+          <CustomInput placeholder="New Password" value={newPassword} setValue={setNewPassword} secureTextEntry={true} />
         </View>
-        <CustomButton text={"Forgot password?"} onPress={onForgotPassword} type="container_forgot" />
       </View>
       <View style={styles.button_container}>
-        <CustomButton text={'Login'} onPress={onLogInPress} type="container_Primary" textColour="white"/>
+        
+        <CustomButton text={'Submit'} onPress={onSubmit} type="container_Primary" textColour="white"/>
+        <CustomButton text={'Back to Log In'} onPress={onBackLogIn} type="container_forgot" textColour="gray"/>
       </View>
     </View>
   );
@@ -95,10 +96,10 @@ const styles = StyleSheet.create({
     marginTop: 100,
   },
   first_input_container: {
-    marginBottom: 20,
+    marginBottom: 0,
   },
   second_input_container: {
-    marginTop: 20,
+    marginTop: 0,
   },
 });
-export default LogInPage;
+export default NewPasswordScreen;

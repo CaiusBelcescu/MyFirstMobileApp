@@ -20,8 +20,8 @@ function SignInPage() {
   const[option,setOption]= useState('');
 
   const onNextPress = () =>{
-    () => navigation.navigate('LogIn')
-  }
+    navigation.navigate('SignIn2');
+  };
 
   return (
     <View style={styles.container}>
@@ -59,15 +59,8 @@ function SignInPage() {
           />
         </View>
       </View>
-      <View style={styles.button_container}>
-        <Button
-          title="Next"
-          color="white"
-          style={styles.button}
-          onPress={() => navigation.navigate('SignIn2')}
-        />
-      </View>
-      <CustomButton text={'Next'} onPress={onNextPress} type="button_container" />
+      
+      <CustomButton text={'Next'} onPress={onNextPress} type="button_container" textColour="white" />
     </View>
   );
 }

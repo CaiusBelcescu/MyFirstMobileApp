@@ -5,18 +5,19 @@ import loginImage from '../../../assets/images/startUpPage.png';
 import LogInButton from '../../components/LogInButton/LogInButton';
 import SignUpButton from '../../components/SignUpButton/SignUpButton';
 import CustomButton from '../../components/CustomButton/CustomButton';
+import { useNavigation } from '@react-navigation/native';
 
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
 const loginImageUri = Image.resolveAssetSource(loginImage).uri;
 
 const Home = () => {
-
+  const navigation = useNavigation();
   const onSignInPress = () =>{
-
-  }
+    navigation.navigate('SignIn');
+  };
   const onLogInPress = () =>{
-    () => navigation.navigate('LogIn')
-  }
+    navigation.navigate('LogIn');
+  };
 
   return (
     // <SafeAreaView>
@@ -35,9 +36,8 @@ const Home = () => {
       />
       <View style={styles.container}>
         <View style={styles2.container}>
-          <LogInButton />
-          <CustomButton text={'Login'} onPress={onLogInPress} type="container_Primary" />
-          <SignUpButton />
+          <CustomButton text={'Log In'} onPress={onLogInPress} type="container_Primary" textColour="white"/>
+          <CustomButton text={'Sign In'} onPress={onSignInPress} type="container_Primary" textColour="white"/>
         </View>
       </View>
     </View>

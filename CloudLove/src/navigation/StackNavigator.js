@@ -5,7 +5,7 @@ import Home from '../screens/Home/Home';
 import LogInPage from '../screens/LogInPage/LogInPage';
 import SignInPage from '../screens/SignInPage/SignInPage';
 import SignInPage2 from "../screens/SignInPage2/SignInPage2";
-import EmailConfirm from '../screens/EmailConfirm/EmailConfirm';
+import EmailConfirmationPage from '../screens/EmailConfirmationPage/EmailConfirmationPage';
 import ForgotPassword from '../screens/ForgotPassword/ForgotPassword';
 import NewPasswordScreen from '../screens/NewPasswordScreen/NewPasswordScreen';
 import SwipingScreen from '../screens/SwipingScreen/SwipingScreen';
@@ -48,7 +48,7 @@ const StackNavigator = () => {
         />
          <Stack.Screen
           name="EmailConfirm"
-          component={EmailConfirm}
+          component={EmailConfirmationPage}
           options={{
             title: '',
             // headerStyle: {

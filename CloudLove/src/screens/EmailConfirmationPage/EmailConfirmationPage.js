@@ -1,27 +1,26 @@
-import React,{useState} from 'react';
-import {View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import logoImage from '../../../assets/images/logoCloudLove.png';
 import loginImage from '../../../assets/images/startUpPage.png';
 import LogInButton from '../../components/LogInButton/LogInButton';
 import {withNavigation} from 'react-navigation';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
 const loginImageUri = Image.resolveAssetSource(loginImage).uri;
 
-const EmailConfirm = () => {
-
-  const navigation=useNavigation();
-  const[code,setCode] = useState('');
-  const onRegister = () =>{
+const EmailConfirmationPage = () => {
+  const navigation = useNavigation();
+  const [code, setCode] = useState('');
+  const onRegister = () => {
     navigation.navigate('Home');
   };
-  const onResendCode= () =>{
+  const onResendCode = () => {
     //navigation.navigate('Home');
   };
-  const onBackLogIn = () =>{
+  const onBackLogIn = () => {
     navigation.navigate('LogIn');
   };
 
@@ -35,17 +34,34 @@ const EmailConfirm = () => {
           style={styles.logo}
         />
       </View>
-      <View>
-        <View style={styles.first_input_container}>
-          <Text style={styles.text}>Email confirmation code:</Text>
-          <CustomInput placeholder="Code..." value={code} setValue={setCode} secureTextEntry={false} />
-        </View>
+      <View style={styles.first_input_container}>
+        <Text style={styles.text}>Email confirmation code:</Text>
+        <CustomInput
+          placeholder="Code..."
+          value={code}
+          setValue={setCode}
+          secureTextEntry={false}
+        />
       </View>
       <View style={styles.button_container}>
-        
-        <CustomButton text={'Register'} onPress={onRegister} type="container_Primary" textColour="white"/>
-        <CustomButton text={'Resend Code'} onPress={onResendCode} type="container_forgot" textColour="gray"/>
-        <CustomButton text={'Back to Log In'} onPress={onBackLogIn} type="container_forgot" textColour="gray"/>
+        <CustomButton
+          text={'Register'}
+          onPress={onRegister}
+          type="container_Primary"
+          textColour="white"
+        />
+        <CustomButton
+          text={'Resend Code'}
+          onPress={onResendCode}
+          type="container_forgot"
+          textColour="gray"
+        />
+        <CustomButton
+          text={'Back to Log In'}
+          onPress={onBackLogIn}
+          type="container_forgot"
+          textColour="gray"
+        />
       </View>
     </View>
   );
@@ -79,9 +95,7 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: 100,
-    marginLeft: 0,
-    paddingRight: 200,
-    alignItems: 'flex-start',
+    fontSize: 20,
   },
   yourInput: {
     backgroundColor: '#D9D9D9',
@@ -92,13 +106,14 @@ const styles = StyleSheet.create({
   },
   button_container: {
     width: '50%',
-    marginTop: 100,
+    marginTop: 70,
   },
   first_input_container: {
     marginBottom: 20,
+    width: '70%',
   },
   second_input_container: {
     marginTop: 20,
   },
 });
-export default EmailConfirm;
+export default EmailConfirmationPage;

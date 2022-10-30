@@ -1,18 +1,17 @@
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Button, Image, StyleSheet, Text, TextInput, View} from 'react-native';
 import CustomButton from '../../components/CustomButton/CustomButton';
 
 function SignInPage2() {
-
-  const navigation= useNavigation();
-  const onCreatePress = () =>{
+  const navigation = useNavigation();
+  const onCreatePress = () => {
     navigation.navigate('EmailConfirm');
   };
-  const onTerms = () =>{
+  const onTerms = () => {
     navigation.navigate('LogIn');
   };
-  const onPrivacy = () =>{
+  const onPrivacy = () => {
     navigation.navigate('LogIn');
   };
 
@@ -44,15 +43,33 @@ function SignInPage2() {
           <TextInput placeholder="Languages..." style={styles.yourInput} />
         </View>
       </View>
-      <Text style={styles.text_bottom}>By registering, you confirm that you accept our {''}
-        <Text style={styles.link} onPress={onTerms}>Terms of Use </Text> and <Text style={styles.link} onPress={onPrivacy} >Privacy Policy</Text></Text>
-      <CustomButton text={'Create'} onPress={onCreatePress} type="button_container2" textColour="white" />
-      
+      <View style={styles.privacy_container}>
+        <Text style={styles.text_bottom}>
+          By registering, you confirm that you accept our {''}
+          <Text style={styles.link} onPress={onTerms}>
+            Terms of Use{' '}
+          </Text>{' '}
+          and{' '}
+          <Text style={styles.link} onPress={onPrivacy}>
+            Privacy Policy
+          </Text>
+        </Text>
+      </View>
+      <CustomButton
+        text={'Create'}
+        onPress={onCreatePress}
+        type="button_container2"
+        textColour="white"
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  privacy_container: {
+    width: '80%',
+    paddingTop: 10,
+  },
   button_container: {
     backgroundColor: '#A681F3',
     borderRadius: 10,
@@ -62,11 +79,11 @@ const styles = StyleSheet.create({
     width: '50%',
     top: 180,
   },
-  text_bottom:{
+  text_bottom: {
     marginTop: 110,
   },
-  link:{
-    color:'#A681F9',
+  link: {
+    color: '#A681F9',
   },
   button: {
     textDecorationColor: 'white',

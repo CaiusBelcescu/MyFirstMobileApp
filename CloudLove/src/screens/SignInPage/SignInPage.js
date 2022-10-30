@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
-import {Button, Image, StyleSheet, Text, TextInput, View, ScrollView} from 'react-native';
+import React, {useState} from 'react';
+import {
+  Button,
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  ScrollView,
+} from 'react-native';
 import femaleGender from '../../../assets/images/female-gender.png';
 import maleGender from '../../../assets/images/male-gender.png';
-import {NavigationActions as navigation} from "react-navigation";
-import {useNavigation} from "@react-navigation/native";
+import {NavigationActions as navigation} from 'react-navigation';
+import {useNavigation} from '@react-navigation/native';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import CustomInput from '../../components/CustomInput/CustomInput';
 
@@ -13,13 +21,13 @@ const maleGenderUri = Image.resolveAssetSource(maleGender).uri;
 function SignInPage() {
   const navigation = useNavigation();
 
-  const[username,setUsername]= useState('');
-  const[email,setEmail]= useState('');
-  const[password,setPassword]= useState('');
-  const[passwordRepeat,setPasswordRepeat]=useState('');
-  const[option,setOption]= useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordRepeat, setPasswordRepeat] = useState('');
+  const [option, setOption] = useState('');
 
-  const onNextPress = () =>{
+  const onNextPress = () => {
     navigation.navigate('SignIn2');
   };
 
@@ -29,19 +37,37 @@ function SignInPage() {
       <View style={styles.general_input_container}>
         <View style={styles.input_container}>
           <Text style={styles.text}>Username:</Text>
-          <CustomInput placeholder="Username..." value={username} setValue={setUsername} />
+          <CustomInput
+            placeholder="Username..."
+            value={username}
+            setValue={setUsername}
+          />
         </View>
         <View style={styles.input_container}>
           <Text style={styles.text}>Email:</Text>
-          <CustomInput placeholder="Email.." value={email} setValue={setEmail} />
+          <CustomInput
+            placeholder="Email.."
+            value={email}
+            setValue={setEmail}
+          />
         </View>
         <View style={styles.input_container}>
           <Text style={styles.text}>Password:</Text>
-          <CustomInput placeholder="Password..." value={password} setValue={setPassword} secureTextEntry />
+          <CustomInput
+            placeholder="Password..."
+            value={password}
+            setValue={setPassword}
+            secureTextEntry
+          />
         </View>
         <View style={styles.input_container}>
           <Text style={styles.text}>Confirm Password:</Text>
-          <CustomInput placeholder={"Confirm Password..."} value={passwordRepeat} setValue={setPasswordRepeat} secureTextEntry />
+          <CustomInput
+            placeholder={'Confirm Password...'}
+            value={passwordRepeat}
+            setValue={setPasswordRepeat}
+            secureTextEntry
+          />
         </View>
         <View style={styles.input_container}>
           <Text style={styles.text}>Choose Option:</Text>
@@ -59,8 +85,13 @@ function SignInPage() {
           />
         </View>
       </View>
-      
-      <CustomButton text={'Next'} onPress={onNextPress} type="button_container" textColour="white" />
+
+      <CustomButton
+        text={'Next'}
+        onPress={onNextPress}
+        type="button_container"
+        textColour="white"
+      />
     </View>
   );
 }

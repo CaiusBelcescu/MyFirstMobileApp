@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { View, Text , StyleSheet, Button} from 'react-native';
+import React, {Component} from 'react';
+import {View, Text, StyleSheet, Button} from 'react-native';
 
-const CustomButton = ({onPress, text, type,textColour}) => {
-    return (
+const CustomButton = ({onPress, text, type, textColour}) => {
+  return (
     <View style={styles[type]}>
       <Button
         title={text}
@@ -11,42 +11,39 @@ const CustomButton = ({onPress, text, type,textColour}) => {
         onPress={onPress}
       />
     </View>
-      
-    );
+  );
 };
 
 const styles = StyleSheet.create({
-    container_Primary: {
-      backgroundColor: '#A681F3',
-      borderRadius: 10,
-      paddingTop: 3,
-      paddingBottom: 3,
-      marginBottom: 10,
-    },
-    container_forgot:{
-        
-    },
-    button: {
-      textDecorationColor: 'white',
-    },
-    button_container: {
-        backgroundColor: '#A681F3',
-        borderRadius: 10,
-        paddingTop: 3,
-        paddingBottom: 3,
-        marginBottom: 10,
-        width: '50%',
-        top: 280,
-      },
-      button_container2: {
-        backgroundColor: '#A681F3',
-        borderRadius: 10,
-        paddingTop: 3,
-        paddingBottom: 3,
-        marginBottom: 10,
-        width: '50%',
-        top: 40,
-      },
-  });
+  container_Primary: {
+    backgroundColor: '#A681F3',
+    borderRadius: 10,
+    paddingTop: 3,
+    paddingBottom: 3,
+    marginBottom: 10,
+  },
+  container_forgot: {},
+  button: {
+    textDecorationColor: 'white',
+  },
+  button_container: {
+    backgroundColor: '#A681F3',
+    borderRadius: 10,
+    paddingTop: 3,
+    paddingBottom: 3,
+    marginBottom: 10,
+    width: '50%',
+    top: 280,
+  },
+  button_container2: {
+    backgroundColor: '#A681F3',
+    borderRadius: 10,
+    paddingTop: 3,
+    paddingBottom: 3,
+    marginBottom: 10,
+    width: '50%',
+    top: 30,
+  },
+});
 
 export default CustomButton;

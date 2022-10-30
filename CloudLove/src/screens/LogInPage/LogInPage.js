@@ -1,25 +1,25 @@
-import React,{useState} from 'react';
-import {View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import logoImage from '../../../assets/images/logoCloudLove.png';
 import loginImage from '../../../assets/images/startUpPage.png';
 import LogInButton from '../../components/LogInButton/LogInButton';
 import {withNavigation} from 'react-navigation';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
 const loginImageUri = Image.resolveAssetSource(loginImage).uri;
 
 const LogInPage = () => {
   const navigation = useNavigation();
-  const[username,setUsername] = useState('');
-  const[password,setPassword]= useState('');
-  const onLogInPress = () =>{
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const onLogInPress = () => {
     //validate
     navigation.navigate('SwipingScreen');
   };
-  const onForgotPassword = () =>{
+  const onForgotPassword = () => {
     navigation.navigate('ForgotPassword');
   };
 
@@ -33,19 +33,38 @@ const LogInPage = () => {
           style={styles.logo}
         />
       </View>
-      <View>
+      <View style={styles.general_input_container}>
         <View style={styles.first_input_container}>
-          <Text style={styles.text}>Username:</Text>
-          <CustomInput placeholder="Username..." value={username} setValue={setUsername} secureTextEntry={false} />
+          <Text style={styles.username_text}>Username:</Text>
+          <CustomInput
+            placeholder="Username..."
+            value={username}
+            setValue={setUsername}
+            secureTextEntry={false}
+          />
         </View>
         <View style={styles.second_input_container}>
-          <Text>Password:</Text>
-          <CustomInput placeholder="Password..." value={password} setValue={setPassword} secureTextEntry={true} />
+          <Text style={styles.password_text}>Password:</Text>
+          <CustomInput
+            placeholder="Password..."
+            value={password}
+            setValue={setPassword}
+            secureTextEntry={true}
+          />
         </View>
-        <CustomButton text={"Forgot password?"} onPress={onForgotPassword} type="container_forgot" />
+        <CustomButton
+          text={'Forgot password?'}
+          onPress={onForgotPassword}
+          type="container_forgot"
+        />
       </View>
       <View style={styles.button_container}>
-        <CustomButton text={'Login'} onPress={onLogInPress} type="container_Primary" textColour="white"/>
+        <CustomButton
+          text={'Login'}
+          onPress={onLogInPress}
+          type="container_Primary"
+          textColour="white"
+        />
       </View>
     </View>
   );
@@ -64,6 +83,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F7F8FC',
   },
+  general_input_container: {
+    width: '70%',
+  },
   logo: {
     width: 100,
     height: 100,
@@ -77,11 +99,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#E799B6',
     //position: 'absolute',
   },
-  text: {
+  username_text: {
     marginTop: 100,
-    marginLeft: 0,
-    paddingRight: 200,
-    alignItems: 'flex-start',
+    fontSize: 20,
+  },
+  password_text: {
+    fontSize: 20,
   },
   yourInput: {
     backgroundColor: '#D9D9D9',

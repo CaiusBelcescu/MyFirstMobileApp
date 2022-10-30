@@ -45,6 +45,7 @@ function SignInPage2() {
         />
       </View>
       <CustomButton text={'Create'} onPress={onCreatePress} type="button_container2" />
+      <Text style={styles.text_bottom}>By registering, you confirm that you accept our terms of Use and Privacy Policy</Text>
     </View>
   );
 }
@@ -58,6 +59,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: '50%',
     top: 180,
+  },
+  text_bottom:{
+
   },
   button: {
     textDecorationColor: 'white',

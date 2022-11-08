@@ -1,15 +1,11 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import logoImage from '../../../assets/images/logoCloudLove.png';
-import loginImage from '../../../assets/images/startUpPage.png';
-import LogInButton from '../../components/LogInButton/LogInButton';
-import {withNavigation} from 'react-navigation';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
-const loginImageUri = Image.resolveAssetSource(loginImage).uri;
 
 const LogInPage = () => {
   const navigation = useNavigation();

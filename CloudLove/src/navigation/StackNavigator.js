@@ -4,13 +4,24 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from '../screens/Home/Home';
 import LogInPage from '../screens/LogInPage/LogInPage';
 import SignInPage from '../screens/SignInPage/SignInPage';
-import SignInPage2 from "../screens/SignInPage2/SignInPage2";
+import SignInPage2 from '../screens/SignInPage2/SignInPage2';
 import EmailConfirmationPage from '../screens/EmailConfirmationPage/EmailConfirmationPage';
 import ForgotPassword from '../screens/ForgotPassword/ForgotPassword';
 import NewPasswordScreen from '../screens/NewPasswordScreen/NewPasswordScreen';
 import SwipingScreen from '../screens/SwipingScreen/SwipingScreen';
+import {Image} from 'react-native';
+import previousImage from '../../assets/images/previous.png';
 
+//const previousImageUri = Image.resolveAssetSource(previousImage).uri;
 const Stack = createNativeStackNavigator();
+// const MyCustomHeaderBackImage = () => (
+//   <Image
+//     source={{
+//       uri: previousImageUri,
+//     }}
+//     style={{width: 22, height: 22}}
+//   />
+// );
 
 const StackNavigator = () => {
   return (
@@ -46,7 +57,7 @@ const StackNavigator = () => {
             },
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="EmailConfirm"
           component={EmailConfirmationPage}
           options={{
@@ -100,6 +111,7 @@ const StackNavigator = () => {
             //   backgroundColor: '#A681F3',
             // },
             headerTintColor: '#fff',
+            //headerBackImageSource: MyCustomHeaderBackImage,
             headerTransparent: true,
             headerBackTitle: 'Back',
             headerTitleStyle: {

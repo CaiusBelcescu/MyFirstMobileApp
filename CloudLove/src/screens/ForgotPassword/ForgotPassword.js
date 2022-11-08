@@ -1,23 +1,28 @@
-import React,{useState} from 'react';
-import {View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import logoImage from '../../../assets/images/logoCloudLove.png';
 import loginImage from '../../../assets/images/startUpPage.png';
 import {withNavigation} from 'react-navigation';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import {useForm, Controller} from 'react-hook-form';
 
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
 const loginImageUri = Image.resolveAssetSource(loginImage).uri;
 
 const ForgotPassword = () => {
-
-  const navigation=useNavigation();
-  const[username,setUsername] = useState('');
-  const onSend = () =>{
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
+  const navigation = useNavigation();
+  const [username, setUsername] = useState('');
+  const onSend = () => {
     navigation.navigate('NewPasswordScreen');
   };
-  const onBackLogIn = () =>{
+  const onBackLogIn = () => {
     navigation.navigate('LogIn');
   };
 
@@ -34,13 +39,31 @@ const ForgotPassword = () => {
       <View>
         <View style={styles.first_input_container}>
           <Text style={styles.text}>Write your username</Text>
-          <CustomInput placeholder="Username..." value={username} setValue={setUsername} secureTextEntry={false} />
+          <CustomInput
+            name="confirmPass"
+            control={control}
+            placeholder="Confirm password..."
+            secureTextEntry={false}
+            rules={{
+              required: 'Password',
+              minLength: {value: 7, message: 'Passwprd min 7'},
+            }}
+          />
         </View>
       </View>
       <View style={styles.button_container}>
-        
-        <CustomButton text={'Send'} onPress={onSend} type="container_Primary" textColour="white"/>
-        <CustomButton text={'Back to Log In'} onPress={onBackLogIn} type="container_forgot" textColour="gray"/>
+        <CustomButton
+          text={'Send'}
+          onPress={handleSubmit(onSend)}
+          type="container_Primary"
+          textColour="white"
+        />
+        <CustomButton
+          text={'Back to Log In'}
+          onPress={onBackLogIn}
+          type="container_forgot"
+          textColour="gray"
+        />
       </View>
     </View>
   );

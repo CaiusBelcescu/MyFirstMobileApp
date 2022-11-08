@@ -14,6 +14,7 @@ import {NavigationActions as navigation} from 'react-navigation';
 import {useNavigation} from '@react-navigation/native';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import CustomInput from '../../components/CustomInput/CustomInput';
+import {useForm, Controller} from 'react-hook-form';
 
 const femaleGenderUri = Image.resolveAssetSource(femaleGender).uri;
 const maleGenderUri = Image.resolveAssetSource(maleGender).uri;
@@ -27,6 +28,12 @@ function SignInPage() {
   const [passwordRepeat, setPasswordRepeat] = useState('');
   const [option, setOption] = useState('');
 
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
+
   const onNextPress = () => {
     navigation.navigate('SignIn2');
   };
@@ -38,35 +45,53 @@ function SignInPage() {
         <View style={styles.input_container}>
           <Text style={styles.text}>Username:</Text>
           <CustomInput
+            name="username"
+            control={control}
             placeholder="Username..."
-            value={username}
-            setValue={setUsername}
+            secureTextEntry={false}
+            rules={{
+              required: 'Require username',
+              minLength: {value: 7, message: 'Passwprd min 7'},
+            }}
           />
         </View>
         <View style={styles.input_container}>
           <Text style={styles.text}>Email:</Text>
           <CustomInput
-            placeholder="Email.."
-            value={email}
-            setValue={setEmail}
+            name="email"
+            control={control}
+            placeholder="Email..."
+            secureTextEntry={true}
+            rules={{
+              required: 'Require email',
+              minLength: {value: 7, message: 'Passwprd min 7'},
+            }}
           />
         </View>
         <View style={styles.input_container}>
           <Text style={styles.text}>Password:</Text>
           <CustomInput
-            placeholder="Password..."
-            value={password}
-            setValue={setPassword}
-            secureTextEntry
+            name="password"
+            control={control}
+            placeholder="Username..."
+            secureTextEntry={true}
+            rules={{
+              required: 'Require password',
+              minLength: {value: 7, message: 'Passwprd min 7'},
+            }}
           />
         </View>
         <View style={styles.input_container}>
           <Text style={styles.text}>Confirm Password:</Text>
           <CustomInput
-            placeholder={'Confirm Password...'}
-            value={passwordRepeat}
-            setValue={setPasswordRepeat}
-            secureTextEntry
+            name="confirmPass"
+            control={control}
+            placeholder="Confirm password..."
+            secureTextEntry={false}
+            rules={{
+              required: 'Password',
+              minLength: {value: 7, message: 'Passwprd min 7'},
+            }}
           />
         </View>
         <View style={styles.input_container}>
@@ -88,7 +113,7 @@ function SignInPage() {
 
       <CustomButton
         text={'Next'}
-        onPress={onNextPress}
+        onPress={handleSubmit(onNextPress)}
         type="button_container"
         textColour="white"
       />

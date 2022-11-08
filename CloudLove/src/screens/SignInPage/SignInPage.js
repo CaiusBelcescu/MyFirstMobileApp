@@ -51,7 +51,7 @@ function SignInPage() {
             secureTextEntry={false}
             rules={{
               required: 'Require username',
-              minLength: {value: 7, message: 'Passwprd min 7'},
+              minLength: {value: 7, message: 'Password min 7'},
             }}
           />
         </View>
@@ -64,7 +64,7 @@ function SignInPage() {
             secureTextEntry={true}
             rules={{
               required: 'Require email',
-              minLength: {value: 7, message: 'Passwprd min 7'},
+              minLength: {value: 7, message: 'Password min 7'},
             }}
           />
         </View>
@@ -77,7 +77,7 @@ function SignInPage() {
             secureTextEntry={true}
             rules={{
               required: 'Require password',
-              minLength: {value: 7, message: 'Passwprd min 7'},
+              minLength: {value: 7, message: 'Password min 7'},
             }}
           />
         </View>
@@ -90,7 +90,7 @@ function SignInPage() {
             secureTextEntry={false}
             rules={{
               required: 'Password',
-              minLength: {value: 7, message: 'Passwprd min 7'},
+              minLength: {value: 7, message: 'Password min 7'},
             }}
           />
         </View>

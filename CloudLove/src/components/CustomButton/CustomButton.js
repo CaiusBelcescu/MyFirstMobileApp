@@ -22,7 +22,9 @@ const styles = StyleSheet.create({
     paddingBottom: 3,
     marginBottom: 10,
   },
-  container_forgot: {},
+  container_forgot: {
+    paddingTop: 10,
+  },
   button: {
     textDecorationColor: 'white',
   },

@@ -26,7 +26,7 @@ const CustomInput = ({control, name, rules, placeholder, secureTextEntry}) => {
             />
           </View>
           {error && (
-            <Text style={{color: 'red', alignSelf: 'stretch'}}>
+            <Text style={styles.error_message_style}>
               {error.message || 'Error'}
             </Text>
           )}
@@ -47,5 +47,10 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   input: {},
+  error_message_style: {
+    color: 'red',
+    alignSelf: 'stretch',
+    marginBottom: -15,
+  },
 });
 export default CustomInput;

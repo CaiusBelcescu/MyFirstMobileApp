@@ -36,17 +36,17 @@ const ForgotPassword = () => {
           style={styles.logo}
         />
       </View>
-      <View>
+      <View style={styles.input_for_username}>
         <View style={styles.first_input_container}>
-          <Text style={styles.text}>Write your username</Text>
+          <Text style={styles.text}>Write your username:</Text>
           <CustomInput
             name="confirmPass"
             control={control}
-            placeholder="Confirm password..."
+            placeholder="Username..."
             secureTextEntry={false}
             rules={{
-              required: 'Password',
-              minLength: {value: 7, message: 'Passwprd min 7'},
+              required: 'Require username',
+              minLength: {value: 7, message: 'Password min 7'},
             }}
           />
         </View>
@@ -82,6 +82,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F7F8FC',
   },
+  input_for_username: {
+    width: '70%',
+  },
   logo: {
     width: 100,
     height: 100,
@@ -97,9 +100,7 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: 100,
-    marginLeft: 0,
-    paddingRight: 200,
-    alignItems: 'flex-start',
+    fontSize: 20,
   },
   yourInput: {
     backgroundColor: '#D9D9D9',

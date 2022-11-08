@@ -2,16 +2,21 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import logoImage from '../../../assets/images/logoCloudLove.png';
 import loginImage from '../../../assets/images/startUpPage.png';
-import LogInButton from '../../components/LogInButton/LogInButton';
 import {withNavigation} from 'react-navigation';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import {useNavigation} from '@react-navigation/native';
+import {useForm, Controller} from 'react-hook-form';
 
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
 const loginImageUri = Image.resolveAssetSource(loginImage).uri;
 
 const EmailConfirmationPage = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
   const navigation = useNavigation();
   const [code, setCode] = useState('');
   const onRegister = () => {
@@ -38,15 +43,19 @@ const EmailConfirmationPage = () => {
         <Text style={styles.text}>Email confirmation code:</Text>
         <CustomInput
           placeholder="Code..."
-          value={code}
-          setValue={setCode}
+          name="code"
+          control={control}
           secureTextEntry={false}
+          rules={{
+            required: 'Password',
+            //minLength: {value: 7, message: 'Passwprd min 7'},
+          }}
         />
       </View>
       <View style={styles.button_container}>
         <CustomButton
           text={'Register'}
-          onPress={onRegister}
+          onPress={handleSubmit(onRegister)}
           type="container_Primary"
           textColour="white"
         />

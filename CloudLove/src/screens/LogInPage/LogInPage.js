@@ -1,17 +1,36 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+  TextInput,
+} from 'react-native';
 import logoImage from '../../../assets/images/logoCloudLove.png';
+import loginImage from '../../../assets/images/startUpPage.png';
+import {withNavigation} from 'react-navigation';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import {useNavigation} from '@react-navigation/native';
+import {useForm, Controller} from 'react-hook-form';
 
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
+const loginImageUri = Image.resolveAssetSource(loginImage).uri;
 
 const LogInPage = () => {
   const navigation = useNavigation();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const onLogInPress = () => {
+  //const [username, setUsername] = useState('');
+  //const [password, setPassword] = useState('');
+
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
+
+  const onLogInPress = data => {
+    console.log(data);
     //validate
     navigation.navigate('SwipingScreen');
   };
@@ -33,19 +52,27 @@ const LogInPage = () => {
         <View style={styles.first_input_container}>
           <Text style={styles.username_text}>Username:</Text>
           <CustomInput
+            name="username"
+            control={control}
             placeholder="Username..."
-            value={username}
-            setValue={setUsername}
             secureTextEntry={false}
+            rules={{
+              required: 'Require username',
+              minLength: {value: 7, message: 'Passwprd min 7'},
+            }}
           />
         </View>
         <View style={styles.second_input_container}>
           <Text style={styles.password_text}>Password:</Text>
           <CustomInput
+            name="password"
+            control={control}
             placeholder="Password..."
-            value={password}
-            setValue={setPassword}
             secureTextEntry={true}
+            rules={{
+              required: 'Require password',
+              minLength: {value: 7, message: 'Passwprd min 7'},
+            }}
           />
         </View>
         <CustomButton
@@ -57,7 +84,7 @@ const LogInPage = () => {
       <View style={styles.button_container}>
         <CustomButton
           text={'Login'}
-          onPress={onLogInPress}
+          onPress={handleSubmit(onLogInPress)}
           type="container_Primary"
           textColour="white"
         />

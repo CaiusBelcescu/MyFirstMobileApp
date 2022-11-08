@@ -2,8 +2,6 @@ import React from 'react';
 import {View, StyleSheet, Image, SafeAreaView} from 'react-native';
 import logoImage from '../../../assets/images/logoCloudLove.png';
 import loginImage from '../../../assets/images/startUpPage.png';
-import LogInButton from '../../components/LogInButton/LogInButton';
-import SignUpButton from '../../components/SignUpButton/SignUpButton';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 

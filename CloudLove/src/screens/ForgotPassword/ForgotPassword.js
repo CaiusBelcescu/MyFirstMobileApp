@@ -58,7 +58,7 @@ const ForgotPassword = () => {
           type="container_Primary"
           textColour="white"
         />
-        <CustomButton
+        <CustomButton //this is a custom button
           text={'Back to Log In'}
           onPress={onBackLogIn}
           type="container_forgot"

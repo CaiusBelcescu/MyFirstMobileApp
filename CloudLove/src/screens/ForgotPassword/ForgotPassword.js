@@ -25,7 +25,7 @@ const ForgotPassword = () => {
   const onBackLogIn = () => {
     navigation.navigate('LogIn');
   };
-
+  //Added another line for a commit.
   return (
     <View style={styles.container}>
       <View style={styles.container_top}>

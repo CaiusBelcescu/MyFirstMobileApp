@@ -26,6 +26,7 @@ const ForgotPassword = () => {
     navigation.navigate('LogIn');
   };
   //Added another line for a commit.
+  //Added another line for another commit.
   return (
     <View style={styles.container}>
       <View style={styles.container_top}>

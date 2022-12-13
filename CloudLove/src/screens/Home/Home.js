@@ -19,6 +19,7 @@ const Home = () => {
 
   return (
     // <SafeAreaView>
+//last
     //laptop conving tomorow lăsat usless push
     <View style={styles.container_buttons}>
       <Image

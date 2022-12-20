@@ -15,6 +15,7 @@ import {useNavigation} from '@react-navigation/native';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import {useForm, Controller} from 'react-hook-form';
+//unimportantzzzzzzzzz
 
 const femaleGenderUri = Image.resolveAssetSource(femaleGender).uri;
 const maleGenderUri = Image.resolveAssetSource(maleGender).uri;

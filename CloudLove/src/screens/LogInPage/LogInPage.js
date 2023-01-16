@@ -32,7 +32,7 @@ const LogInPage = () => {
   const onLogInPress = data => {
     console.log(data);
     //validate
-    navigation.navigate('SwipingScreen');
+    navigation.navigate('AfterLogin');
   };
   const onForgotPassword = () => {
     navigation.navigate('ForgotPassword');

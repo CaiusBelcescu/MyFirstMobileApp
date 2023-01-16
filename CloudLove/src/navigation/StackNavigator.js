@@ -9,6 +9,7 @@ import EmailConfirmationPage from '../screens/EmailConfirmationPage/EmailConfirm
 import ForgotPassword from '../screens/ForgotPassword/ForgotPassword';
 import NewPasswordScreen from '../screens/NewPasswordScreen/NewPasswordScreen';
 import SwipingScreen from '../screens/SwipingScreen/SwipingScreen';
+import AfterLogIn from '../screens/UserInterfaceAfterLogingIn/AfterLogIn';
 import {Image} from 'react-native';
 import previousImage from '../../assets/images/previous.png';
 
@@ -30,6 +31,21 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Home"
           component={Home}
+          options={{
+            title: '',
+            // headerStyle: {
+            //   backgroundColor: '#A681F3',
+            // },
+            headerTintColor: '#fff',
+            headerTransparent: true,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="AfterLogin"
+          component={AfterLogIn}
           options={{
             title: '',
             // headerStyle: {

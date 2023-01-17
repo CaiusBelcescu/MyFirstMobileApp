@@ -10,163 +10,186 @@ import ForgotPassword from '../screens/ForgotPassword/ForgotPassword';
 import NewPasswordScreen from '../screens/NewPasswordScreen/NewPasswordScreen';
 import SwipingScreen from '../screens/SwipingScreen/SwipingScreen';
 import AfterLogIn from '../screens/UserInterfaceAfterLogingIn/AfterLogIn';
-import {Image} from 'react-native';
-import previousImage from '../../assets/images/previous.png';
+import {useEffect} from 'react';
+import {Auth} from 'aws-amplify';
+import {useState} from 'react';
+import {ActivityIndicator} from 'react-native';
+import {View} from 'react-native';
+import {Hub} from 'aws-amplify';
 
-//const previousImageUri = Image.resolveAssetSource(previousImage).uri;
 const Stack = createNativeStackNavigator();
-// const MyCustomHeaderBackImage = () => (
-//   <Image
-//     source={{
-//       uri: previousImageUri,
-//     }}
-//     style={{width: 22, height: 22}}
-//   />
-// );
-
 const StackNavigator = () => {
+  const [user, setUser] = useState(undefined);
+  const checkUser = async () => {
+    try {
+      const authUser = await Auth.currentAuthenticatedUser({bypassCache: true});
+      setUser(authUser);
+    } catch (error) {
+      setUser(null);
+    }
+  };
+  useEffect(() => {
+    checkUser();
+  }, []);
+  //De facut
+  // useEffect(() => {
+  //   const lisener = data => {};
+  //   Hub.lisen();
+  // }, []);
+
+  if (user === undefined) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justyfyContent: 'center',
+          alignitems: 'center',
+        }}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
   return (
     <Stack.Navigator>
       <Stack.Group>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{
-            title: '',
-            // headerStyle: {
-            //   backgroundColor: '#A681F3',
-            // },
-            headerTintColor: '#fff',
-            headerTransparent: true,
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen
-          name="AfterLogin"
-          component={AfterLogIn}
-          options={{
-            title: '',
-            // headerStyle: {
-            //   backgroundColor: '#A681F3',
-            // },
-            headerTintColor: '#fff',
-            headerTransparent: true,
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen
-          name="SwipingScreen"
-          component={SwipingScreen}
-          options={{
-            title: '',
-            // headerStyle: {
-            //   backgroundColor: '#A681F3',
-            // },
-            headerTintColor: '#fff',
-            headerTransparent: true,
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen
-          name="EmailConfirm"
-          component={EmailConfirmationPage}
-          options={{
-            title: '',
-            // headerStyle: {
-            //   backgroundColor: '#A681F3',
-            // },
-            headerTintColor: '#fff',
-            headerTransparent: true,
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen
-          name="ForgotPassword"
-          component={ForgotPassword}
-          options={{
-            title: '',
-            // headerStyle: {
-            //   backgroundColor: '#A681F3',
-            // },
-            headerTintColor: '#fff',
-            headerTransparent: true,
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen
-          name="NewPasswordScreen"
-          component={NewPasswordScreen}
-          options={{
-            title: '',
-            // headerStyle: {
-            //   backgroundColor: '#A681F3',
-            // },
-            headerTintColor: '#fff',
-            headerTransparent: true,
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen
-          name="LogIn"
-          component={LogInPage}
-          options={{
-            title: '',
-            // headerStyle: {
-            //   backgroundColor: '#A681F3',
-            // },
-            headerTintColor: '#fff',
-            //headerBackImageSource: MyCustomHeaderBackImage,
-            headerTransparent: true,
-            headerBackTitle: 'Back',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen
-          name="SignIn"
-          component={SignInPage}
-          options={{
-            title: '',
-            // headerStyle: {
-            //   backgroundColor: '#A681F3',
-            // },
-            headerTintColor: '#fff',
-            headerTransparent: true,
-            headerBackTitle: 'Back',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen
-          name="SignIn2"
-          component={SignInPage2}
-          options={{
-            title: '',
-            // headerStyle: {
-            //   backgroundColor: '#A681F3',
-            // },
-            headerTintColor: '#fff',
-            headerTransparent: true,
-            headerBackTitle: 'Back',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
+        {user ? (
+          <Stack.Screen
+            name="AfterLogin"
+            component={AfterLogIn}
+            options={{
+              title: '',
+              headerTintColor: '#fff',
+              headerTransparent: true,
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          />
+        ) : (
+          <>
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{
+                title: '',
+                headerTintColor: '#fff',
+                headerTransparent: true,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="SwipingScreen"
+              component={SwipingScreen}
+              options={{
+                title: '',
+                // headerStyle: {
+                //   backgroundColor: '#A681F3',
+                // },
+                headerTintColor: '#fff',
+                headerTransparent: true,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="EmailConfirm"
+              component={EmailConfirmationPage}
+              options={{
+                title: '',
+                // headerStyle: {
+                //   backgroundColor: '#A681F3',
+                // },
+                headerTintColor: '#fff',
+                headerTransparent: true,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="ForgotPassword"
+              component={ForgotPassword}
+              options={{
+                title: '',
+                // headerStyle: {
+                //   backgroundColor: '#A681F3',
+                // },
+                headerTintColor: '#fff',
+                headerTransparent: true,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="NewPasswordScreen"
+              component={NewPasswordScreen}
+              options={{
+                title: '',
+                // headerStyle: {
+                //   backgroundColor: '#A681F3',
+                // },
+                headerTintColor: '#fff',
+                headerTransparent: true,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="LogIn"
+              component={LogInPage}
+              options={{
+                title: '',
+                // headerStyle: {
+                //   backgroundColor: '#A681F3',
+                // },
+                headerTintColor: '#fff',
+                //headerBackImageSource: MyCustomHeaderBackImage,
+                headerTransparent: true,
+                headerBackTitle: 'Back',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="SignIn"
+              component={SignInPage}
+              options={{
+                title: '',
+                // headerStyle: {
+                //   backgroundColor: '#A681F3',
+                // },
+                headerTintColor: '#fff',
+                headerTransparent: true,
+                headerBackTitle: 'Back',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="SignIn2"
+              component={SignInPage2}
+              options={{
+                title: '',
+                // headerStyle: {
+                //   backgroundColor: '#A681F3',
+                // },
+                headerTintColor: '#fff',
+                headerTransparent: true,
+                headerBackTitle: 'Back',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+          </>
+        )}
       </Stack.Group>
     </Stack.Navigator>
   );

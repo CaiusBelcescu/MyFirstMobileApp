@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, Image, ScrollView, Alert} from 'react-native';
 import logoImage from '../../../assets/images/logoCloudLove.png';
 import loginImage from '../../../assets/images/startUpPage.png';
 import {withNavigation} from 'react-navigation';
@@ -7,23 +7,41 @@ import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import {useForm, Controller} from 'react-hook-form';
+import {useRoute} from '@react-navigation/native';
+import {Auth} from 'aws-amplify';
 
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
 const loginImageUri = Image.resolveAssetSource(loginImage).uri;
 
 const EmailConfirmationPage = () => {
-  const {
-    control,
-    handleSubmit,
-    formState: {errors},
-  } = useForm();
+  const route = useRoute();
+  const {control, handleSubmit, watch} = useForm({
+    defaultValues: {username: route?.params?.username},
+  });
+
+  const username = watch('username');
   const navigation = useNavigation();
-  const [code, setCode] = useState('');
-  const onRegister = () => {
-    navigation.navigate('Home');
+  const [loading, setLoading] = useState(false);
+  const onRegister = async data => {
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+    try {
+      await Auth.confirmSignUp(data.username, data.code);
+      Alert.alert('Check email');
+      navigation.navigate('LogIn');
+    } catch (error) {
+      Alert.alert('Oops', error.message);
+    }
+    setLoading(false);
   };
-  const onResendCode = () => {
-    //navigation.navigate('Home');
+  const onResendCode = async () => {
+    try {
+      await Auth.resendSignUp(username);
+    } catch (error) {
+      Alert.alert('Oops', error.message);
+    }
   };
   const onBackLogIn = () => {
     navigation.navigate('LogIn');
@@ -37,6 +55,19 @@ const EmailConfirmationPage = () => {
             uri: logoImageUri,
           }}
           style={styles.logo}
+        />
+      </View>
+      <View style={styles.first_input_container}>
+        <Text style={styles.text}>Username:</Text>
+        <CustomInput
+          placeholder="Username..."
+          name="username"
+          control={control}
+          secureTextEntry={false}
+          rules={{
+            required: 'Password',
+            //minLength: {value: 7, message: 'Passwprd min 7'},
+          }}
         />
       </View>
       <View style={styles.first_input_container}>
@@ -54,7 +85,7 @@ const EmailConfirmationPage = () => {
       </View>
       <View style={styles.button_container}>
         <CustomButton
-          text={'Register'}
+          text={loading ? 'Loading...' : 'Register'}
           onPress={handleSubmit(onRegister)}
           type="container_Primary"
           textColour="white"

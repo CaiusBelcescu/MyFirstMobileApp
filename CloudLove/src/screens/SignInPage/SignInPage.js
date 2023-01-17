@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
   ScrollView,
+  Alert,
 } from 'react-native';
 import femaleGender from '../../../assets/images/female-gender.png';
 import maleGender from '../../../assets/images/male-gender.png';
@@ -15,19 +16,14 @@ import {useNavigation} from '@react-navigation/native';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import {useForm, Controller} from 'react-hook-form';
-//unimportantzzzzzzzzz
+import {Auth} from 'aws-amplify';
 
 const femaleGenderUri = Image.resolveAssetSource(femaleGender).uri;
 const maleGenderUri = Image.resolveAssetSource(maleGender).uri;
 
 function SignInPage() {
   const navigation = useNavigation();
-
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordRepeat, setPasswordRepeat] = useState('');
-  const [option, setOption] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const {
     control,
@@ -35,8 +31,24 @@ function SignInPage() {
     formState: {errors},
   } = useForm();
 
-  const onNextPress = () => {
-    navigation.navigate('SignIn2');
+  const onNextPress = async data => {
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+    const {username, password, email, name} = data;
+    try {
+      const response = await Auth.signUp({
+        username,
+        password,
+        attributes: {email, name},
+      });
+
+      navigation.navigate('EmailConfirm');
+    } catch (error) {
+      Alert.alert('Oops', error.message);
+    }
+    setLoading(false);
   };
 
   return (
@@ -52,7 +64,20 @@ function SignInPage() {
             secureTextEntry={false}
             rules={{
               required: 'Require username',
-              minLength: {value: 7, message: 'Password min 7'},
+              //minLength: {value: 7, message: 'Password min 7'},
+            }}
+          />
+        </View>
+        <View style={styles.input_container}>
+          <Text style={styles.text}>Name:</Text>
+          <CustomInput
+            name="name"
+            control={control}
+            placeholder="Name..."
+            secureTextEntry={false}
+            rules={{
+              required: 'Require email',
+              //minLength: {value: 7, message: 'Password min 7'},
             }}
           />
         </View>
@@ -62,10 +87,10 @@ function SignInPage() {
             name="email"
             control={control}
             placeholder="Email..."
-            secureTextEntry={true}
+            secureTextEntry={false}
             rules={{
               required: 'Require email',
-              minLength: {value: 7, message: 'Password min 7'},
+              //minLength: {value: 7, message: 'Password min 7'},
             }}
           />
         </View>
@@ -78,7 +103,7 @@ function SignInPage() {
             secureTextEntry={true}
             rules={{
               required: 'Require password',
-              //minLength: {value: 7, message: 'Password min 7'},
+              minLength: {value: 7, message: 'Password min 7'},
             }}
           />
         </View>
@@ -88,7 +113,7 @@ function SignInPage() {
             name="confirmPass"
             control={control}
             placeholder="Confirm password..."
-            secureTextEntry={false}
+            secureTextEntry={true}
             rules={{
               required: 'Password',
               //minLength: {value: 7, message: 'Password min 7'},
@@ -111,9 +136,8 @@ function SignInPage() {
           />
         </View>
       </View>
-
       <CustomButton
-        text={'Next'}
+        text={loading ? 'Loading...' : 'Next'}
         onPress={handleSubmit(onNextPress)}
         type="button_container"
         textColour="white"
@@ -142,14 +166,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   male_icon: {
-    width: 100,
-    height: 100,
+    width: 50,
+    height: 50,
     position: 'absolute',
     top: 50,
   },
   female_icon: {
-    width: 100,
-    height: 100,
+    width: 50,
+    height: 50,
     position: 'absolute',
     top: 50,
     marginLeft: 200,
@@ -161,7 +185,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   input_container: {
-    marginTop: 20,
+    marginTop: 1,
   },
   general_input_container: {
     top: 130,

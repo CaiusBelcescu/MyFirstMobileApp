@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   TextInput,
+  Alert,
 } from 'react-native';
 import logoImage from '../../../assets/images/logoCloudLove.png';
 import loginImage from '../../../assets/images/startUpPage.png';
@@ -14,25 +15,35 @@ import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import {useForm, Controller} from 'react-hook-form';
+import {Auth} from 'aws-amplify';
 
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
 const loginImageUri = Image.resolveAssetSource(loginImage).uri;
 
 const LogInPage = () => {
   const navigation = useNavigation();
-  //const [username, setUsername] = useState('');
-  //const [password, setPassword] = useState('');
-  //commit cuz I have no lapop yet
+  const [loading, setLoading] = useState(false);
   const {
     control,
     handleSubmit,
     formState: {errors},
   } = useForm();
 
-  const onLogInPress = data => {
-    console.log(data);
+  const onLogInPress = async data => {
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+
+    try {
+      await Auth.signIn(data.username, data.password);
+      navigation.navigate('AfterLogin');
+    } catch (error) {
+      Alert.alert('Oops', error.message);
+    }
+    setLoading(false);
     //validate
-    navigation.navigate('AfterLogin');
+    //navigation.navigate('AfterLogin');
   };
   const onForgotPassword = () => {
     navigation.navigate('ForgotPassword');
@@ -58,7 +69,7 @@ const LogInPage = () => {
             secureTextEntry={false}
             rules={{
               required: 'Require username',
-              minLength: {value: 7, message: 'Passwprd min 7'},
+              //minLength: {value: 7, message: 'Passwprd min 7'},
             }}
           />
         </View>
@@ -83,7 +94,7 @@ const LogInPage = () => {
       </View>
       <View style={styles.button_container}>
         <CustomButton
-          text={'Login'}
+          text={loading ? 'Loading...' : 'Login'}
           onPress={handleSubmit(onLogInPress)}
           type="container_Primary"
           textColour="white"

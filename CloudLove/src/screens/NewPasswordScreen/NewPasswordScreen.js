@@ -1,24 +1,29 @@
-import React,{useState} from 'react';
-import {View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, Image, ScrollView, Alert} from 'react-native';
 import logoImage from '../../../assets/images/logoCloudLove.png';
 import loginImage from '../../../assets/images/startUpPage.png';
 import {withNavigation} from 'react-navigation';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import {useForm, Controller} from 'react-hook-form';
+import {Auth} from 'aws-amplify';
 
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
 const loginImageUri = Image.resolveAssetSource(loginImage).uri;
 
 const NewPasswordScreen = () => {
-
-  const navigation=useNavigation();
-  const[code,setCode] = useState('');
-  const[newPassword,setNewPassword]= useState('');
-  const onSubmit = () =>{
-    navigation.navigate('Home');
+  const navigation = useNavigation();
+  const {control, handleSubmit} = useForm();
+  const onSubmit = async data => {
+    try {
+      await Auth.forgotPasswordSubmit(data.username, data.code, data.newPass);
+      navigation.navigate('LogIn');
+    } catch (error) {
+      Alert.alert('Oops', error.message);
+    }
   };
-  const onBackLogIn = () =>{
+  const onBackLogIn = () => {
     navigation.navigate('LogIn');
   };
 
@@ -34,18 +39,58 @@ const NewPasswordScreen = () => {
       </View>
       <View>
         <View style={styles.first_input_container}>
+          <Text style={styles.text}>Username</Text>
+          <CustomInput
+            name="username"
+            control={control}
+            placeholder="username"
+            secureTextEntry={false}
+            rules={{
+              required: 'Require username',
+              //minLength: {value: 7, message: 'Password min 7'},
+            }}
+          />
+        </View>
+        <View style={styles.first_input_container}>
           <Text style={styles.text}>Email Code</Text>
-          <CustomInput placeholder="Code.." value={code} setValue={setCode} secureTextEntry={false} />
+          <CustomInput
+            name="code"
+            control={control}
+            placeholder="code..."
+            secureTextEntry={false}
+            rules={{
+              required: 'Require username',
+              //minLength: {value: 7, message: 'Password min 7'},
+            }}
+          />
         </View>
         <View style={styles.second_input_container}>
           <Text style={styles.text}>New Password</Text>
-          <CustomInput placeholder="New Password" value={newPassword} setValue={setNewPassword} secureTextEntry={true} />
+          <CustomInput
+            name="newPass"
+            control={control}
+            placeholder="New Password..."
+            secureTextEntry={true}
+            rules={{
+              required: 'Require username',
+              //minLength: {value: 7, message: 'Password min 7'},
+            }}
+          />
         </View>
       </View>
       <View style={styles.button_container}>
-        
-        <CustomButton text={'Submit'} onPress={onSubmit} type="container_Primary" textColour="white"/>
-        <CustomButton text={'Back to Log In'} onPress={onBackLogIn} type="container_forgot" textColour="gray"/>
+        <CustomButton
+          text={'Submit'}
+          onPress={handleSubmit(onSubmit)}
+          type="container_Primary"
+          textColour="white"
+        />
+        <CustomButton //this is a custom button
+          text={'Back to Log In'}
+          onPress={onBackLogIn}
+          type="container_forgot"
+          textColour="gray"
+        />
       </View>
     </View>
   );
@@ -92,7 +137,7 @@ const styles = StyleSheet.create({
   },
   button_container: {
     width: '50%',
-    marginTop: 100,
+    marginTop: 20,
   },
   first_input_container: {
     marginBottom: 0,

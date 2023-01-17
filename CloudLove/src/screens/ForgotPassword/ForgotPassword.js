@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, Image, ScrollView, Alert} from 'react-native';
 import logoImage from '../../../assets/images/logoCloudLove.png';
 import loginImage from '../../../assets/images/startUpPage.png';
 import {withNavigation} from 'react-navigation';
@@ -7,27 +7,26 @@ import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import {useForm, Controller} from 'react-hook-form';
+import {Auth} from 'aws-amplify';
 
 const logoImageUri = Image.resolveAssetSource(logoImage).uri;
 const loginImageUri = Image.resolveAssetSource(loginImage).uri;
 
 const ForgotPassword = () => {
-  const {
-    control,
-    handleSubmit,
-    formState: {errors},
-  } = useForm();
+  const {control, handleSubmit} = useForm();
   const navigation = useNavigation();
-  const [username, setUsername] = useState('');
-  const onSend = () => {
-    navigation.navigate('NewPasswordScreen');
+  const onSend = async data => {
+    try {
+      await Auth.forgotPassword(data.username);
+      navigation.navigate('NewPasswordScreen');
+    } catch (error) {
+      Alert.alert('Oops', error.message);
+    }
+    //navigation.navigate('NewPasswordScreen');
   };
   const onBackLogIn = () => {
     navigation.navigate('LogIn');
   };
-  //Added another line for a commit.
-  //Added another line for another commit.
-  //Third empty commit
   return (
     <View style={styles.container}>
       <View style={styles.container_top}>
@@ -42,13 +41,13 @@ const ForgotPassword = () => {
         <View style={styles.first_input_container}>
           <Text style={styles.text}>Write your username:</Text>
           <CustomInput
-            name="confirmPass"
+            name="username"
             control={control}
             placeholder="Username..."
             secureTextEntry={false}
             rules={{
               required: 'Require username',
-              minLength: {value: 7, message: 'Password min 7'},
+              //minLength: {value: 7, message: 'Password min 7'},
             }}
           />
         </View>

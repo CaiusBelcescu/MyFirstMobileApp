@@ -9,7 +9,7 @@ import EmailConfirmationPage from '../screens/EmailConfirmationPage/EmailConfirm
 import ForgotPassword from '../screens/ForgotPassword/ForgotPassword';
 import NewPasswordScreen from '../screens/NewPasswordScreen/NewPasswordScreen';
 import SwipingScreen from '../screens/SwipingScreen/SwipingScreen';
-import AfterLogIn from '../screens/UserInterfaceAfterLogingIn/AfterLogIn';
+import AfterLogIn from '../screens/UserInterfaceAfterLogIn/AfterLogIn';
 import {useEffect} from 'react';
 import {Auth} from 'aws-amplify';
 import {useState} from 'react';
@@ -31,11 +31,15 @@ const StackNavigator = () => {
   useEffect(() => {
     checkUser();
   }, []);
-  //De facut
-  // useEffect(() => {
-  //   const lisener = data => {};
-  //   Hub.lisen();
-  // }, []);
+  useEffect(() => {
+    const listener = data => {
+      if (data.payload.event === 'signIn' || data.payload.event === 'signOut') {
+        checkUser();
+      }
+    };
+    Hub.listen('auth', listener);
+    return () => Hub.remove('auth', listener);
+  }, []);
 
   if (user === undefined) {
     return (

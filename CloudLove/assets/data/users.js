@@ -3,7 +3,7 @@ export default [
     id: '1',
     name: 'Vadim Savin',
     image:
-      'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fcute%2520couple%2F&psig=AOvVaw2-OB1sS0cSXuMl4Cv_qosE&ust=1666433731995000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCKCclMeL8foCFQAAAAAdAAAAABAK',
+      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim1.JPG',
     bio: 'I will be the semicolons to your code',
   },
   {

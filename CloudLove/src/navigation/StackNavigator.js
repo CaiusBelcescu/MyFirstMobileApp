@@ -9,7 +9,9 @@ import EmailConfirmationPage from '../screens/EmailConfirmationPage/EmailConfirm
 import ForgotPassword from '../screens/ForgotPassword/ForgotPassword';
 import NewPasswordScreen from '../screens/NewPasswordScreen/NewPasswordScreen';
 import SwipingScreen from '../screens/SwipingScreen/SwipingScreen';
+import Matches from '../screens/Matches/Matches';
 import AfterLogIn from '../screens/UserInterfaceAfterLogIn/AfterLogIn';
+import Swipe2 from '../screens/Swipe2/Swipe2';
 import {useEffect} from 'react';
 import {Auth} from 'aws-amplify';
 import {useState} from 'react';
@@ -57,18 +59,50 @@ const StackNavigator = () => {
     <Stack.Navigator>
       <Stack.Group>
         {user ? (
-          <Stack.Screen
-            name="AfterLogin"
-            component={AfterLogIn}
-            options={{
-              title: '',
-              headerTintColor: '#fff',
-              headerTransparent: true,
-              headerTitleStyle: {
-                fontWeight: 'bold',
-              },
-            }}
-          />
+          <>
+            <Stack.Screen
+              name="Swipe2"
+              component={Swipe2}
+              options={{
+                title: '',
+                // headerStyle: {
+                //   backgroundColor: '#A681F3',
+                // },
+                headerTintColor: '#fff',
+                headerTransparent: true,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="AfterLogin"
+              component={AfterLogIn}
+              options={{
+                title: '',
+                headerTintColor: '#fff',
+                headerTransparent: true,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="Matches"
+              component={Matches}
+              options={{
+                title: '',
+                // headerStyle: {
+                //   backgroundColor: '#A681F3',
+                // },
+                headerTintColor: '#fff',
+                headerTransparent: true,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+          </>
         ) : (
           <>
             <Stack.Screen

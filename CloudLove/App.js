@@ -8,14 +8,10 @@ import config from './src/aws-exports';
 Amplify.configure(config);
 
 const App = () => {
-  //Auth.signOut();
   return (
     <NavigationContainer style={{flex: 1}}>
       <StackNavigator />
     </NavigationContainer>
-    // <View>
-    //   <AfterLogIn />
-    // </View>
   );
 };
 //Commit

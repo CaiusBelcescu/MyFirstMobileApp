@@ -3,7 +3,7 @@ import {Text, ImageBackground, View, StyleSheet} from 'react-native';
 
 const Card = props => {
   const {name, image, bio} = props.user;
-  console.log('on who?', props.user.id);
+  //console.log('on who?', props.user.id);
   return (
     <View style={styles.card}>
       <ImageBackground

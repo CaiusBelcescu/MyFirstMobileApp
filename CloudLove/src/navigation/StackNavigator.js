@@ -11,6 +11,7 @@ import NewPasswordScreen from '../screens/NewPasswordScreen/NewPasswordScreen';
 import SwipingScreen from '../screens/SwipingScreen/SwipingScreen';
 import Matches from '../screens/Matches/Matches';
 import AfterLogIn from '../screens/UserInterfaceAfterLogIn/AfterLogIn';
+import HomeInsight from '../screens/HomeInsight/HomeInsight';
 import Swipe2 from '../screens/Swipe2/Swipe2';
 import {useEffect} from 'react';
 import {Auth} from 'aws-amplify';
@@ -60,6 +61,21 @@ const StackNavigator = () => {
       <Stack.Group>
         {user ? (
           <>
+            <Stack.Screen
+              name="HomeInsight"
+              component={HomeInsight}
+              options={{
+                title: '',
+                // headerStyle: {
+                //   backgroundColor: '#A681F3',
+                // },
+                headerTintColor: '#fff',
+                headerTransparent: true,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
             <Stack.Screen
               name="Swipe2"
               component={Swipe2}

@@ -14,6 +14,7 @@ import {User} from '../../models';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
+
   const [name, setName] = useState('');
   const [bio, setBio] = useState('');
   const [gender, setGender] = useState();
@@ -21,26 +22,22 @@ const Profile = () => {
 
   useEffect(() => {
     const getCurrentUser = async () => {
-      try {
-        const user = await Auth.currentAuthenticatedUser();
+      const user = await Auth.currentAuthenticatedUser();
 
-        const dbUsers = await DataStore.query(
-          User,
-          u => u.sub === user.attributes.sub,
-        );
-        if (dbUsers.length < 0) {
-          return;
-        }
-        const dbUser = dbUsers[0];
-        setUser(dbUser);
-
-        setName(dbUser.name);
-        setBio(dbUser.bio);
-        setGender(dbUser.gender);
-        setLookingFor(dbUser.lookingFor);
-      } catch (error) {
-        Alert.warn('Error12');
+      const dbUsers = await DataStore.query(
+        User,
+        u => u.sub === user.attributes.sub,
+      );
+      if (dbUsers.length < 0) {
+        return;
       }
+      const dbUser = dbUsers[0];
+      setUser(dbUser);
+
+      setName(dbUser.name);
+      setBio(dbUser.bio);
+      setGender(dbUser.gender);
+      setLookingFor(dbUser.lookingFor);
     };
     getCurrentUser();
   }, []);
@@ -48,8 +45,14 @@ const Profile = () => {
   const isValid = () => {
     return name && bio && gender && lookingFor;
   };
-  const updateUser = async () => {
-    try {
+
+  const save = async () => {
+    if (!isValid()) {
+      console.warn('Not valid');
+      return;
+    }
+
+    if (user) {
       const updatedUser = User.copyOf(user, updated => {
         updated.name = name;
         updated.bio = bio;
@@ -58,14 +61,8 @@ const Profile = () => {
       });
 
       await DataStore.save(updatedUser);
-    } catch (error) {
-      console.log(error);
-      Alert.warn('failed uppdate');
-    }
-  };
-
-  const createUser = async () => {
-    try {
+    } else {
+      // create a new user
       const authUser = await Auth.currentAuthenticatedUser();
 
       const newUser = new User({
@@ -77,55 +74,11 @@ const Profile = () => {
         image:
           'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png',
       });
-      console.log('Here');
       await DataStore.save(newUser);
-      //console.log('Here');
-    } catch (error) {
-      Alert.warn('failed create');
     }
+
+    Alert.alert('User saved successfully');
   };
-
-  const save = async () => {
-    try {
-      if (user) {
-        await updateUser();
-      } else {
-        await createUser();
-      }
-      Alert.warn('User saved successfully');
-    } catch (error) {
-      console.log(error);
-      Alert.warn('Failed to save user, please try again');
-    }
-  };
-  // if (user) {
-  //   const updatedUser = User.copyOf(user, updated => {
-  //     updated.name = name;
-  //     updated.bio = bio;
-  //     updated.gender = gender;
-  //     updated.lookingFor = lookingFor;
-  //   });
-
-  //   await DataStore.save(updatedUser);
-  // } else {
-  //   // create a new user
-  //   const authUser = await Auth.currentAuthenticatedUser();
-
-  //   const newUser = new User({
-  //     sub: authUser.attributes.sub,
-  //     name,
-  //     bio,
-  //     gender,
-  //     lookingFor,
-  //     image:
-  //       'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png',
-  //   });
-  //   await DataStore.save(newUser);
-  // }
-
-  //Alert.warn('User saved successfully');
-  // };
-
   return (
     <SafeAreaView style={styles.root}>
       <View style={styles.container}>

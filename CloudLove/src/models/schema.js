@@ -158,13 +158,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "sub": {
-                    "name": "sub",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -213,12 +206,12 @@ export const schema = {
             "name": "Genders",
             "values": [
                 "MALE",
-                "FELMALE",
+                "FEMALE",
                 "OTHER"
             ]
         }
     },
     "nonModels": {},
     "codegenVersion": "3.3.4",
-    "version": "9845263faf89d793d75d153b7c7d66aa"
+    "version": "7486c773f649779adb8a3084f390c488"
 };

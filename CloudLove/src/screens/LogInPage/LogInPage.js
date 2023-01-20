@@ -37,7 +37,7 @@ const LogInPage = () => {
 
     try {
       await Auth.signIn(data.username, data.password);
-      navigation.navigate('Swipe2');
+      //navigation.navigate('Swipe2');
     } catch (error) {
       Alert.alert('Oops', error.message);
     }

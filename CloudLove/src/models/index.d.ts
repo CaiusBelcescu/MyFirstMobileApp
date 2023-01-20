@@ -4,7 +4,7 @@ import { LazyLoading, LazyLoadingDisabled, AsyncItem } from "@aws-amplify/datast
 
 export enum Genders {
   MALE = "MALE",
-  FELMALE = "FELMALE",
+  FEMALE = "FEMALE",
   OTHER = "OTHER"
 }
 
@@ -57,7 +57,6 @@ type EagerUser = {
   readonly bio: string;
   readonly gender: Genders | keyof typeof Genders;
   readonly lookingFor: Genders | keyof typeof Genders;
-  readonly sub: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -73,7 +72,6 @@ type LazyUser = {
   readonly bio: string;
   readonly gender: Genders | keyof typeof Genders;
   readonly lookingFor: Genders | keyof typeof Genders;
-  readonly sub: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

@@ -8,8 +8,10 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Swipe2 from '../Swipe2/Swipe2';
 import Matches from '../Matches/Matches';
 import Profile from '../Profile/Profile';
+import {Amplify} from 'aws-amplify';
+import config from '../../aws-exports';
 //import MatchesScreen from './src/screens/MatchesScreen';
-
+//Amplify.configure(config);
 const HomeInsight = () => {
   const [activeScreen, setActiveScreen] = useState('HOME');
 

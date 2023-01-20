@@ -4,7 +4,7 @@ import { schema } from './schema';
 
 const Genders = {
   "MALE": "MALE",
-  "FELMALE": "FELMALE",
+  "FEMALE": "FEMALE",
   "OTHER": "OTHER"
 };
 

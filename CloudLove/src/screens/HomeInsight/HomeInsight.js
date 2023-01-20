@@ -28,11 +28,11 @@ const HomeInsight = () => {
               color={activeScreen === 'HOME' ? activeColor : color}
             />
           </Pressable>
-          <MaterialCommunityIcons
-            name="star-four-points"
-            size={30}
-            color={color}
-          />
+          {/*<MaterialCommunityIcons*/}
+          {/*  name="star-four-points"*/}
+          {/*  size={30}*/}
+          {/*  color={color}*/}
+          {/*/>*/}
           <Pressable onPress={() => setActiveScreen('CHAT')}>
             <Ionicons
               name="ios-chatbubbles"

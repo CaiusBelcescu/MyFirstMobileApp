@@ -103,7 +103,7 @@ const AnimatedStack = props => {
     //console.warn(nextIndex, '    ', currentIndex);
     setNextIndex(currentIndex + 1);
   }, [currentIndex, translateX]);
-  console.log('Current', currentProfile, 'Next', nextProfile);
+  //console.log('Current', currentProfile, 'Next', nextProfile);
   return (
     <View style={styles.root}>
       {nextProfile && (

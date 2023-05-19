@@ -2,7 +2,7 @@ import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-
 // @ts-ignore
 import { LazyLoading, LazyLoadingDisabled, AsyncItem } from "@aws-amplify/datastore";
 
-export enum Genders {
+export enum Gender {
   MALE = "MALE",
   FEMALE = "FEMALE",
   OTHER = "OTHER"
@@ -23,6 +23,8 @@ type EagerMatch = {
   readonly isMatch: boolean;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
+  readonly matchUser1Id?: string | null;
+  readonly matchUser2Id?: string | null;
 }
 
 type LazyMatch = {
@@ -38,6 +40,8 @@ type LazyMatch = {
   readonly isMatch: boolean;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
+  readonly matchUser1Id?: string | null;
+  readonly matchUser2Id?: string | null;
 }
 
 export declare type Match = LazyLoading extends LazyLoadingDisabled ? EagerMatch : LazyMatch
@@ -55,8 +59,9 @@ type EagerUser = {
   readonly name: string;
   readonly image?: string | null;
   readonly bio: string;
-  readonly gender: Genders | keyof typeof Genders;
-  readonly lookingFor: Genders | keyof typeof Genders;
+  readonly gender: Gender | keyof typeof Gender;
+  readonly lookingFor: Gender | keyof typeof Gender;
+  readonly sub: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -70,8 +75,9 @@ type LazyUser = {
   readonly name: string;
   readonly image?: string | null;
   readonly bio: string;
-  readonly gender: Genders | keyof typeof Genders;
-  readonly lookingFor: Genders | keyof typeof Genders;
+  readonly gender: Gender | keyof typeof Gender;
+  readonly lookingFor: Gender | keyof typeof Gender;
+  readonly sub: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

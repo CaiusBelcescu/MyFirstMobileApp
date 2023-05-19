@@ -58,6 +58,28 @@ const styles = StyleSheet.create({
     color: 'white',
     lineHeight: 25,
   },
+  pageContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    width: '100%',
+    backgroundColor: '#ededed',
+  },
+  icons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    padding: 10,
+  },
+  button: {
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 50,
+  },
 });
 
 export default Card;

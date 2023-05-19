@@ -17,6 +17,9 @@
       },
       "api": {
         "AuthentificationCloud": {}
+      },
+      "storage": {
+        "s3authentificationcloudstorage8f5bc202": {}
       }
     }
   }

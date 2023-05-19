@@ -24,7 +24,7 @@ export const schema = {
                             "id"
                         ],
                         "targetNames": [
-                            "User1ID"
+                            "matchUser1Id"
                         ]
                     }
                 },
@@ -42,7 +42,7 @@ export const schema = {
                             "id"
                         ],
                         "targetNames": [
-                            "User2ID"
+                            "matchUser2Id"
                         ]
                     }
                 },
@@ -82,6 +82,20 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
+                },
+                "matchUser1Id": {
+                    "name": "matchUser1Id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "matchUser2Id": {
+                    "name": "matchUser2Id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -144,7 +158,7 @@ export const schema = {
                     "name": "gender",
                     "isArray": false,
                     "type": {
-                        "enum": "Genders"
+                        "enum": "Gender"
                     },
                     "isRequired": true,
                     "attributes": []
@@ -153,8 +167,15 @@ export const schema = {
                     "name": "lookingFor",
                     "isArray": false,
                     "type": {
-                        "enum": "Genders"
+                        "enum": "Gender"
                     },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "sub": {
+                    "name": "sub",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -202,8 +223,8 @@ export const schema = {
         }
     },
     "enums": {
-        "Genders": {
-            "name": "Genders",
+        "Gender": {
+            "name": "Gender",
             "values": [
                 "MALE",
                 "FEMALE",
@@ -213,5 +234,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.3.4",
-    "version": "7486c773f649779adb8a3084f390c488"
+    "version": "fb73fc21056df41be8ae0c1be41f0384"
 };

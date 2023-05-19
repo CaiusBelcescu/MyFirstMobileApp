@@ -10,7 +10,8 @@ import {
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {Auth, DataStore} from 'aws-amplify';
-import {User} from '../../models';
+import {Predicates} from '@aws-amplify/datastore';
+import {User} from '../../models/';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -24,10 +25,10 @@ const Profile = () => {
     const getCurrentUser = async () => {
       const user = await Auth.currentAuthenticatedUser();
 
-      const dbUsers = await DataStore.query(
-        User,
-        u => u.sub === user.attributes.sub,
+      const dbUsers = await DataStore.query(User, u =>
+        u.sub.eq(user.attributes.sub),
       );
+      console.warn(dbUsers);
       if (dbUsers.length < 0) {
         return;
       }
@@ -79,6 +80,7 @@ const Profile = () => {
 
     Alert.alert('User saved successfully');
   };
+
   return (
     <SafeAreaView style={styles.root}>
       <View style={styles.container}>

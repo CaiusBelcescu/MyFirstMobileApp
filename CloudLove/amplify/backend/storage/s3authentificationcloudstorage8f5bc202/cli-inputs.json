@@ -1,0 +1,14 @@
+{
+  "resourceName": "s3authentificationcloudstorage8f5bc202",
+  "bucketName": "authentificationcloud-storage-8f5bc202",
+  "policyUUID": "b8186508",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "DELETE",
+    "READ"
+  ]
+}

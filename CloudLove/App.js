@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import StackNavigator from './src/navigation/StackNavigator';
 import {Amplify} from 'aws-amplify';
 import config from './src/aws-exports';
+import 'core-js/full/symbol/async-iterator';
 
 Amplify.configure(config);
 

@@ -19,25 +19,19 @@ const ROTATION = 60;
 const SWIPE_VELOCITY = 800;
 
 const AnimatedStack = props => {
-  const {data, renderItem, onSwipeRight, onSwipeLeft} = props;
-
+  const {data, renderItem, onSwipeRight, onSwipeLeft, setCurrentUser} = props;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [nextIndex, setNextIndex] = useState(currentIndex + 1);
-
   const currentProfile = data[currentIndex];
   const nextProfile = data[nextIndex];
-
   const {width: screenWidth} = useWindowDimensions();
-
   const hiddenTranslateX = 2 * screenWidth;
-
   const translateX = useSharedValue(0);
   const rotate = useDerivedValue(
     () =>
       interpolate(translateX.value, [0, hiddenTranslateX], [0, ROTATION]) +
       'deg',
   );
-
   const cardStyle = useAnimatedStyle(() => ({
     transform: [
       {
@@ -48,7 +42,6 @@ const AnimatedStack = props => {
       },
     ],
   }));
-
   const nextCardStyle = useAnimatedStyle(() => ({
     transform: [
       {
@@ -65,11 +58,9 @@ const AnimatedStack = props => {
       [1, 0.5, 1],
     ),
   }));
-
   const likeStyle = useAnimatedStyle(() => ({
     opacity: interpolate(translateX.value, [0, hiddenTranslateX / 5], [0, 1]),
   }));
-
   const nopeStyle = useAnimatedStyle(() => ({
     opacity: interpolate(translateX.value, [0, -hiddenTranslateX / 5], [0, 1]),
   }));
@@ -86,24 +77,23 @@ const AnimatedStack = props => {
         translateX.value = withSpring(0);
         return;
       }
-
       translateX.value = withSpring(
         hiddenTranslateX * Math.sign(event.velocityX),
         {},
         () => runOnJS(setCurrentIndex)(currentIndex + 1),
       );
-
       const onSwipe = event.velocityX > 0 ? onSwipeRight : onSwipeLeft;
-      onSwipe && runOnJS(onSwipe)(currentProfile);
+      onSwipe && runOnJS(onSwipe)();
     },
   });
-
   useEffect(() => {
     translateX.value = 0;
-    //console.warn(nextIndex, '    ', currentIndex);
     setNextIndex(currentIndex + 1);
   }, [currentIndex, translateX]);
-  //console.log('Current', currentProfile, 'Next', nextProfile);
+
+  useEffect(() => {
+    setCurrentUser(currentProfile);
+  }, [currentProfile, setCurrentUser]);
   return (
     <View style={styles.root}>
       {nextProfile && (

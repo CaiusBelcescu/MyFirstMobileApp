@@ -23,8 +23,6 @@ type EagerMatch = {
   readonly isMatch: boolean;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly matchUser1Id?: string | null;
-  readonly matchUser2Id?: string | null;
 }
 
 type LazyMatch = {
@@ -40,8 +38,6 @@ type LazyMatch = {
   readonly isMatch: boolean;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly matchUser1Id?: string | null;
-  readonly matchUser2Id?: string | null;
 }
 
 export declare type Match = LazyLoading extends LazyLoadingDisabled ? EagerMatch : LazyMatch

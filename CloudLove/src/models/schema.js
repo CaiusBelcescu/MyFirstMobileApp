@@ -24,7 +24,7 @@ export const schema = {
                             "id"
                         ],
                         "targetNames": [
-                            "matchUser1Id"
+                            "User1ID"
                         ]
                     }
                 },
@@ -42,7 +42,7 @@ export const schema = {
                             "id"
                         ],
                         "targetNames": [
-                            "matchUser2Id"
+                            "User2ID"
                         ]
                     }
                 },
@@ -82,20 +82,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
-                },
-                "matchUser1Id": {
-                    "name": "matchUser1Id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "matchUser2Id": {
-                    "name": "matchUser2Id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 }
             },
             "syncable": true,
@@ -234,5 +220,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.3.4",
-    "version": "fb73fc21056df41be8ae0c1be41f0384"
+    "version": "cd298f8a3b3c40294dd46641350e9f74"
 };
